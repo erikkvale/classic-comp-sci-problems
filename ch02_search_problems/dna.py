@@ -40,12 +40,33 @@ def linear_search(gene: Gene, key_codon: Codon) -> bool:
     return False
 
 
+def binary_search(gene: Gene, key_codon: Codon) -> bool:
+    low: int = 0
+    high: int = len(gene) - 1
+    while low <= high:
+        mid: int = (low + high) // 2
+        if gene[mid] < key_codon:
+            low = mid + 1
+        elif gene[mid] > key_codon:
+            high = mid - 1
+        else:
+            return True
+    return False
+
+
 if __name__ == "__main__":
-    gene: Gene = string_to_gene(gene_str)
+    my_gene: Gene = string_to_gene(gene_str)
     acg: Codon = (Nucleotide.A, Nucleotide.C, Nucleotide.G)
     ggc: Codon = (Nucleotide.G, Nucleotide.G, Nucleotide.C)
-    print(linear_search(gene, acg))
-    print(linear_search(gene, ggc))
+
+    # Linear search: expecting (True, False)
+    assert linear_search(my_gene, acg)      # O(n)
+    assert not linear_search(my_gene, ggc)  # O(n)
+
+    # Binary search: expecting (True, False)
+    my_gene = sorted(my_gene)               # O(n log n)
+    assert binary_search(my_gene, acg)      # O(log n)
+    assert not binary_search(my_gene, ggc)  # O(log n)
 
 
 
