@@ -2,6 +2,7 @@
 Module applying search algorithms and related data structures to DNA sequencing
 and bioinformatics
 
+
 Nucleotides: A, C, G, T
 Codon: Combination of any three nucleotides
 Gene: Composition of codons
